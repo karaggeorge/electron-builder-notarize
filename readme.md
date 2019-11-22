@@ -36,3 +36,11 @@ You will also need to set two environment variables:
 - `APPLE_ID_PASSWORD`: An app-specific password. You can create one at appleid.apple.com
 
 You can replace the entitlements file with your own, as long as those properties are included as well.
+
+## Credits
+
+This package is inspired by this [article](https://medium.com/@TwitterArchiveEraser/notarize-electron-apps-7a5f988406db)
+
+## License
+
+MIT
