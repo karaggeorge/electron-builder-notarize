@@ -29,8 +29,10 @@ module.exports = async params => {
 
 	// Only notarize the app on the master branch
 	if (
-		(process.env.CIRCLE_BRANCH && process.env.CIRCLE_BRANCH !== 'master') ||
-		(process.env.TRAVIS_BRANCH && process.env.TRAVIS_BRANCH !== 'master')
+		!isEnvTrue(process.env.CSC_FOR_PULL_REQUEST) && (
+			(process.env.CIRCLE_BRANCH && process.env.CIRCLE_BRANCH !== 'master') ||
+			(process.env.TRAVIS_BRANCH && process.env.TRAVIS_BRANCH !== 'master')
+		)
 	) {
 		return;
 	}
