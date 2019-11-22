@@ -35,7 +35,7 @@ module.exports = async params => {
 		return;
 	}
 
-	const packageJson = require(path.join(__dirname, 'package.json'));
+	const packageJson = require(path.join(process.cwd(), 'package.json'));
 	const {appId} = packageJson.build;
 
 	const appPath = path.join(params.appOutDir, `${params.packager.appInfo.productFilename}.app`);
