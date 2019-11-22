@@ -1,0 +1,36 @@
+{
+	"name": "electron-builder-notarize",
+	"version": "0.0.0",
+	"description": "Notarize Electron applications using electron-builder",
+	"license": "MIT",
+	"repository": "karaggeorge/electron-builder-notarize",
+	"main": "index.js",
+	"author": {
+		"name": "George Karagkiaouris",
+		"email": "karaggeorge0@gmail.com",
+		"url": "https://gkaragkiaouris.tech"
+	},
+	"peerDependencies": {
+		"electron-builder": ">= 20.44.4"
+	},
+	"engines": {
+		"node": ">=8"
+	},
+	"scripts": {
+		"test": "xo"
+	},
+	"files": [
+		"index.js",
+		"entitlements.mac.inherit.plist"
+	],
+	"keywords": [
+		""
+	],
+	"dependencies": {
+		"electron-notarize": "^0.2.0"
+	},
+	"devDependencies": {
+		"ava": "^2.1.0",
+		"xo": "^0.24.0"
+	}
+}
