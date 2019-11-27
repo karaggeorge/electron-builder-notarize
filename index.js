@@ -2,6 +2,7 @@
 
 const path = require('path');
 const electronNotarize = require('electron-notarize');
+const readPkgUp = require('read-pkg-up');
 // eslint-disable-next-line import/no-extraneous-dependencies
 const util = require('builder-util');
 
@@ -16,6 +17,11 @@ const isEnvTrue = value => {
 
 module.exports = async params => {
 	if (process.platform !== 'darwin') {
+		return;
+	}
+
+	if (!process.env.APPLE_ID || !process.env.APPLE_ID_PASSWORD) {
+		console.log('Skipping because APPLE_ID and/or APPLE_ID_PASSWORD environment varrialbes are missing.');
 		return;
 	}
 
@@ -37,7 +43,7 @@ module.exports = async params => {
 		return;
 	}
 
-	const packageJson = require(path.join(process.cwd(), 'package.json'));
+	const {packageJson} = readPkgUp.sync({cwd: path.resolve('..')});
 	const {appId} = packageJson.build;
 
 	const appPath = path.join(params.appOutDir, `${params.packager.appInfo.productFilename}.app`);
