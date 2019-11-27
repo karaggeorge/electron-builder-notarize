@@ -43,7 +43,7 @@ module.exports = async params => {
 		return;
 	}
 
-	const {packageJson} = readPkgUp.sync({cwd: path.resolve('..')});
+	const {packageJson} = readPkgUp.sync();
 	const {appId} = packageJson.build;
 
 	const appPath = path.join(params.appOutDir, `${params.packager.appInfo.productFilename}.app`);
