@@ -16,7 +16,7 @@ const isEnvTrue = value => {
 };
 
 module.exports = async params => {
-	if (params.platform !== 'darwin') {
+	if (params.electronPlatformName !== 'darwin') {
 		return;
 	}
 
