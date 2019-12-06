@@ -16,7 +16,7 @@ const isEnvTrue = value => {
 };
 
 module.exports = async params => {
-	if (process.platform !== 'darwin') {
+	if (params.platform !== 'darwin') {
 		return;
 	}
 
