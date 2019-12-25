@@ -36,13 +36,13 @@ You will also need to authenticate yourself, either with your Apple ID or using 
 
 ### Apple ID
 
-- `APPLE_ID`: The username of your Apple developer account
-- `APPLE_ID_PASSWORD`: An app-specific password. You can create one at appleid.apple.com
+- `APPLE_ID`: The username of your Apple developer account.
+- `APPLE_ID_PASSWORD`: An app-specific password. You can create one at [appleid.apple.com](https://appleid.apple.com).
 
 ### API Key
 
-- `API_KEY_ID`: The ID of your App Store Connect API key, which can be generated [here](https://appstoreconnect.apple.com/access/api)
-- `API_KEY_ISSUER_ID`: The issuer ID of your API key, which can be looked up on the same site
+- `API_KEY_ID`: The ID of your App Store Connect API key, which can be generated [here](https://appstoreconnect.apple.com/access/api).
+- `API_KEY_ISSUER_ID`: The issuer ID of your API key, which can be looked up on the same site.
 
 You will also need the API key `.p8` file at the correct location on your file system. See [`electron-notarize`](https://github.com/electron/electron-notarize)'s docs for details on this setup.
 
