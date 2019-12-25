@@ -1,6 +1,6 @@
 {
 	"name": "electron-builder-notarize",
-	"version": "1.1.0",
+	"version": "1.1.1",
 	"description": "Notarize Electron applications using electron-builder",
 	"license": "MIT",
 	"repository": "https://github.com/karaggeorge/electron-builder-notarize",
