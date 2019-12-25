@@ -3,7 +3,7 @@
 const path = require('path');
 const {notarize} = require('electron-notarize');
 const readPkgUp = require('read-pkg-up');
-// eslint-disable-next-line import/no-extraneous-dependencies
+// eslint-disable-next-line import/no-unresolved
 const util = require('builder-util');
 
 /**
