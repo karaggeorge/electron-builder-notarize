@@ -30,12 +30,21 @@ In your electron-builder config:
 }
 ```
 
-You will also need to set two environment variables:
+You can replace the entitlements file with your own, as long as those properties are included as well.
 
-- `APPLE_ID`: The username of your apple developer account
+You will also need to authenticate yourself, either with your Apple ID or using an API key. This is done by setting the corresponding environment variables.
+
+### Apple ID
+
+- `APPLE_ID`: The username of your Apple developer account
 - `APPLE_ID_PASSWORD`: An app-specific password. You can create one at appleid.apple.com
 
-You can replace the entitlements file with your own, as long as those properties are included as well.
+### API Key
+
+- `API_KEY_ID`: The ID of your App Store Connect API key, which can be generated [here](https://appstoreconnect.apple.com/access/api)
+- `API_KEY_ISSUER_ID`: The issuer ID of your API key, which can be looked up on the same site
+
+You will also need the API key `.p8` file at the correct location on your file system. See [`electron-notarize`](https://github.com/electron/electron-notarize)'s docs for details on this setup.
 
 ## Credits
 
