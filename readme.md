@@ -46,6 +46,14 @@ You will also need to authenticate yourself, either with your Apple ID or using 
 
 You will also need the API key `.p8` file at the correct location on your file system. See [`electron-notarize`](https://github.com/electron/electron-notarize)'s docs for details on this setup.
 
+### Multiple Teams
+
+If your developer account is a member of multiple teams or organizations, you might see an error. In this case, you need to provide your [Team Short Name](https://github.com/electron/electron-notarize#notes-on-your-team-short-name) as an environment variable:
+
+```sh
+export TEAM_SHORT_NAME=XXXXXXXXX
+```
+
 ## Credits
 
 This package is inspired by this [article](https://medium.com/@TwitterArchiveEraser/notarize-electron-apps-7a5f988406db)
