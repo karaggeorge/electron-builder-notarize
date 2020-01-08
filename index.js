@@ -1,7 +1,7 @@
 'use strict';
 
 const path = require('path');
-const { notarize } = require('electron-notarize');
+const {notarize} = require('electron-notarize');
 const readPkgUp = require('read-pkg-up');
 // eslint-disable-next-line import/no-unresolved
 const util = require('builder-util');
@@ -95,12 +95,12 @@ module.exports = async params => {
 		return;
 	}
 
-	const { packageJson } = readPkgUp.sync();
-	const { appId } = packageJson.build;
+	const {packageJson} = readPkgUp.sync();
+	const {appId} = packageJson.build;
 
 	const appPath = path.join(params.appOutDir, `${params.packager.appInfo.productFilename}.app`);
 
-	const notarizeOptions = { appBundleId: appId, appPath };
+	const notarizeOptions = {appBundleId: appId, appPath};
 	if (authInfo.appleId) {
 		notarizeOptions.appleId = authInfo.appleId;
 		notarizeOptions.appleIdPassword = authInfo.appleIdPassword;
