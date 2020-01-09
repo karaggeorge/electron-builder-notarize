@@ -16,7 +16,8 @@ const getAuthInfo = () => {
 		APPLE_ID: appleId,
 		APPLE_ID_PASSWORD: appleIdPassword,
 		API_KEY_ID: appleApiKey,
-		API_KEY_ISSUER_ID: appleApiIssuer
+		API_KEY_ISSUER_ID: appleApiIssuer,
+		TEAM_SHORT_NAME: teamShortName
 	} = process.env;
 
 	if (!appleId && !appleIdPassword && !appleApiKey && !appleApiIssuer) {
@@ -48,7 +49,8 @@ const getAuthInfo = () => {
 		appleId,
 		appleIdPassword,
 		appleApiKey,
-		appleApiIssuer
+		appleApiIssuer,
+		teamShortName
 	};
 };
 
@@ -105,6 +107,10 @@ module.exports = async params => {
 	} else {
 		notarizeOptions.appleApiKey = authInfo.appleApiKey;
 		notarizeOptions.appleApiIssuer = authInfo.appleApiIssuer;
+	}
+
+	if (authInfo.teamShortName) {
+		notarizeOptions.ascProvider = authInfo.teamShortName;
 	}
 
 	console.log(`Notarizing ${appId} found at ${appPath}`);
