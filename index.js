@@ -95,7 +95,7 @@ module.exports = async params => {
 		return;
 	}
 
-	const {appId} = params.packager._configuration;
+	const {appId} = params.packager.info._configuration;
 	const appPath = path.join(params.appOutDir, `${params.packager.appInfo.productFilename}.app`);
 
 	const notarizeOptions = {appBundleId: appId, appPath};
