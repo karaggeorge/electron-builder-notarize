@@ -1,16 +1,16 @@
-# electron-builder-notarize [![Build Status](https://travis-ci.com/karaggeorge/electron-builder-notarize.svg?branch=master)](https://travis-ci.com/karaggeorge/electron-builder-notarize)
+# vue-cli-plugin-electron-builder-notarize
 
-> Notarize Electron applications using electron-builder
+> Notarize Electron applications using vue-cli-plugin-electron-builder
 
 
 ## Install
 
 ```
 # npm
-npm i electron-builder-notarize --save-dev
+npm i vue-cli-plugin-electron-builder-notarize --save-dev
 
 # yarn
-yarn add electron-builder-notarize --dev
+yarn add vue-cli-plugin-electron-builder-notarize --dev
 ```
 
 
@@ -38,6 +38,8 @@ You will also need to authenticate yourself, either with your Apple ID or using 
 
 - `APPLE_ID`: The username of your Apple developer account.
 - `APPLE_ID_PASSWORD`: An app-specific password. You can create one at [appleid.apple.com](https://appleid.apple.com).
+
+If you have 2FA enabled, generate an app password from https://appleid.apple.com and use the generated password. Otherwise notarize will fail during upload.
 
 ### API Key
 
