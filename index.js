@@ -5,6 +5,8 @@ const {notarize} = require('electron-notarize');
 const readPkgUp = require('read-pkg-up');
 // eslint-disable-next-line import/no-unresolved
 const util = require('builder-util');
+const fs = require('fs');
+const yaml = require('js-yaml');
 
 /**
  * Validates and returns authentication-related environment variables
@@ -96,7 +98,27 @@ module.exports = async params => {
 	}
 
 	const {packageJson} = readPkgUp.sync();
-	const {appId} = packageJson.build;
+	const buildConfig = packageJson.build;
+	let appId = '';
+
+	if (buildConfig) {
+		// appId from ./package.json
+		appId = buildConfig.appId;
+	} else {
+		try {
+			// fallback for vue-cli-plugin-electron-builder
+			// it uses vue.config.js to create electron builder config yaml file
+			// https://github.com/nklayman/vue-cli-plugin-electron-builder
+			const path = './dist_electron/builder-effective-config.yaml'
+			if (fs.existsSync(path)) {
+				let fileContents = fs.readFileSync(path, 'utf8');
+				let data = yaml.safeLoad(fileContents);
+				appId = data.appId;
+			}
+		} catch(err) {
+			console.error(err)
+		}
+	}
 
 	const appPath = path.join(params.appOutDir, `${params.packager.appInfo.productFilename}.app`);
 
