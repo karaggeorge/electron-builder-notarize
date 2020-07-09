@@ -66,9 +66,28 @@ const isEnvTrue = value => {
 };
 
 const getAppId = params => {
-	const buildConfig = fs.readFileSync(path.join(params.outDir, 'builder-effective-config.yaml'));
-	const {appId} = yaml.safeLoad(buildConfig);
-	return appId;
+	const {packager, outDir} = params;
+
+	// Try getting appId from the packager object
+	const config = packager.info._configuration;
+	const appId = config && config.appId;
+
+	if (appId) {
+		return appId;
+	}
+
+	// Try getting appId from the `builder-effective-config.yml`
+	const effectiveConfigPath = path.join(outDir, 'builder-effective-config.yaml');
+	// This doesn't exist in CI
+	if (fs.existsSync(effectiveConfigPath)) {
+		const buildConfig = fs.readFileSync(effectiveConfigPath);
+		const {appId} = yaml.safeLoad(buildConfig);
+		return appId;
+	}
+
+	// Try getting appId from `package.json` or from an env var
+	const {packageJson} = readPkgUp.sync();
+	return (packageJson.build && packageJson.build.appId) || process.env.APP_ID;
 };
 
 module.exports = async params => {
@@ -103,12 +122,7 @@ module.exports = async params => {
 		return;
 	}
 
-	let appId = getAppId(params);
-
-	if (!appId) {
-		const {packageJson} = readPkgUp.sync();
-		appId = packageJson.build.appId;
-	}
+	const appId = getAppId(params);
 
 	if (!appId) {
 		throw new Error('`appId` was not found');

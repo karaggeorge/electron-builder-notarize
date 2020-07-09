@@ -34,6 +34,10 @@ You can replace the entitlements file with your own, as long as those properties
 
 You will also need to authenticate yourself, either with your Apple ID or using an API key. This is done by setting the corresponding environment variables.
 
+### App ID
+
+If for some reason the script can't locate your project's `appId`, you can specify it using the `APP_ID` environment variable.
+
 ### Apple ID
 
 - `APPLE_ID`: The username of your Apple developer account.
