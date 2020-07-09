@@ -31,6 +31,7 @@
 	],
 	"dependencies": {
 		"electron-notarize": "^0.2.0",
+		"js-yaml": "^3.14.0",
 		"read-pkg-up": "^7.0.0"
 	},
 	"devDependencies": {
