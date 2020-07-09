@@ -1,6 +1,8 @@
 'use strict';
 
 const path = require('path');
+const fs = require('fs');
+const yaml = require('js-yaml');
 const {notarize} = require('electron-notarize');
 const readPkgUp = require('read-pkg-up');
 // eslint-disable-next-line import/no-unresolved
@@ -63,6 +65,12 @@ const isEnvTrue = value => {
 	return value === 'true' || value === '' || value === '1';
 };
 
+const getAppId = params => {
+	const buildConfig = fs.readFileSync(path.join(params.outDir, 'builder-effective-config.yaml'));
+	const {appId} = yaml.safeLoad(buildConfig);
+	return appId;
+};
+
 module.exports = async params => {
 	if (params.electronPlatformName !== 'darwin') {
 		return;
@@ -95,8 +103,16 @@ module.exports = async params => {
 		return;
 	}
 
-	const {packageJson} = readPkgUp.sync();
-	const {appId} = packageJson.build;
+	let appId = getAppId(params);
+
+	if (!appId) {
+		const {packageJson} = readPkgUp.sync();
+		appId = packageJson.build.appId;
+	}
+
+	if (!appId) {
+		throw new Error('`appId` was not found');
+	}
 
 	const appPath = path.join(params.appOutDir, `${params.packager.appInfo.productFilename}.app`);
 
