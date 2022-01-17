@@ -2,6 +2,7 @@
 
 > Notarize Electron applications using electron-builder
 
+For more details regarding the options and functionality: https://github.com/electron/electron-notarize
 
 ## Install
 
@@ -34,21 +35,37 @@ You can replace the entitlements file with your own, as long as those properties
 
 You will also need to authenticate yourself, either with your Apple ID or using an API key. This is done by setting the corresponding environment variables.
 
-### App ID
-
 If for some reason the script can't locate your project's `appId`, you can specify it using the `APP_ID` environment variable.
 
-### Apple ID
+### Using `notarytool`
 
-- `APPLE_ID`: The username of your Apple developer account.
-- `APPLE_ID_PASSWORD`: An app-specific password. You can create one at [appleid.apple.com](https://appleid.apple.com).
+In order to use `notarytool` for notarization, XCode 13 or later is required
 
-### API Key
+Authentication methods:
+- username and password
+  - `APPLE_ID` String - The username of your apple developer account
+  - `APPLE_ID_PASSWORD` String - The [app-specific password](https://support.apple.com/HT204397) (not your Apple ID password).
+  - `APPLE_TEAM_ID` String - The team ID you want to notarize under.
+- apiKey with apiIssuer:
+  - `APPLE_API_KEY` String - Required for JWT authentication. See Note on JWT authentication below.
+  - `APPLE_API_KEY_ID` String - Required for JWT authentication. See Note on JWT authentication below.
+  - `APPLE_API_KEY_ISSUER` String - Issuer ID. Required if `APPLE_API_KEY` is specified.
+- keychain with keychainProfile:
+  - `APPLE_KEYCHAIN` String - The name of the keychain or path to the keychain you stored notarization credentials in.
+  - `APPLE_KEYCHAIN_PROFILE` String - The name of the profile you provided when storing notarization credentials.
 
-- `API_KEY_ID`: The ID of your App Store Connect API key, which can be generated [here](https://appstoreconnect.apple.com/access/api).
-- `API_KEY_ISSUER_ID`: The issuer ID of your API key, which can be looked up on the same site.
+### Using Legacy
 
-You will also need the API key `.p8` file at the correct location on your file system. See [`electron-notarize`](https://github.com/electron/electron-notarize)'s docs for details on this setup.
+General options:
+- `TEAM_SHORT_NAME` String - Your [Team Short Name](#notes-on-your-team-short-name).
+
+Authentication methods:
+- username and password
+  - `APPLE_ID` String - The username of your apple developer account
+  - `APPLE_ID_PASSWORD` String - The [app-specific password](https://support.apple.com/HT204397) (not your Apple ID password).
+- apiKey with apiIssuer
+  - `APPLE_API_KEY` String - Required for JWT authentication. See Note on JWT authentication below.
+  - `APPLE_API_KEY_ISSUER` String - Issuer ID. Required if `APPLE_API_KEY` is specified.
 
 ### Multiple Teams
 
@@ -61,6 +78,8 @@ export TEAM_SHORT_NAME=XXXXXXXXX
 ## Credits
 
 This package is inspired by this [article](https://medium.com/@TwitterArchiveEraser/notarize-electron-apps-7a5f988406db)
+
+The library used for notarization: https://github.com/electron/electron-notarize
 
 ## License
 
