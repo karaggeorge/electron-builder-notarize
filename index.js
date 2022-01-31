@@ -81,7 +81,25 @@ module.exports = async params => {
 		appBundleId: appId
 	};
 
-	console.log(`Notarizing ${appId} found at ${appPath}`);
-	await notarize(notarizeOptions);
-	console.log(`Done notarizing ${appId}`);
+	console.log(`📦 Start notarizing ${appId} found at ${appPath}`);
+	
+	try {
+		const res = await notarize(notarizeOptions);
+
+		if (!res) {
+			console.log(`🌟 Notarizing ${appId} successfully !`);
+		}
+		
+		
+	} catch(e) {
+		const error1048Str = 'You must first sign the relevant contracts online. (1048)';
+
+		if (String(e).includes(error1048Str)) {
+			throw Error('📃 Error(1048): You must first sign the relevant contracts online');
+		}
+		
+	  	fs.writeFileSync('notarization-error.log', e);
+		throw '❌ Notarization Error,please check notarization-error.log';
+
+	}
 };
