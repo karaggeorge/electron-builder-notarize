@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 const path = require('path');
 const fs = require('fs');
 const readPkgUp = require('read-pkg-up');
