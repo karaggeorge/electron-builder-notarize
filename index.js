@@ -1,5 +1,7 @@
 'use strict';
 
+require('dotenv').config();
+
 const path = require('path');
 const fs = require('fs');
 const readPkgUp = require('read-pkg-up');
@@ -79,7 +81,23 @@ module.exports = async params => {
 		appBundleId: appId
 	};
 
-	console.log(`Notarizing ${appId} found at ${appPath}`);
-	await notarize(notarizeOptions);
-	console.log(`Done notarizing ${appId}`);
+	console.log(`📦 Start notarizing ${appId} found at ${appPath}`);
+
+	try {
+		const res = await notarize(notarizeOptions);
+
+		if (!res) {
+			console.log(`🌟 Notarizing ${appId} successfully !`);
+		}
+	} catch (error) {
+		const error1048Str = 'You must first sign the relevant contracts online. (1048)';
+
+		if (String(error).includes(error1048Str)) {
+			throw new Error('📃 Error(1048): You must first sign the relevant contracts online');
+		}
+
+		fs.writeFileSync('notarization-error.log', error);
+
+		throw new Error('❌ Notarization Error,please check notarization-error.log');
+	}
 };
