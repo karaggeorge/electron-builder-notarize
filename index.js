@@ -96,7 +96,7 @@ module.exports = async params => {
 			throw new Error('📃 Error(1048): You must first sign the relevant contracts online');
 		}
 
-		fs.writeFileSync('notarization-error.log', error);
+		fs.writeFileSync('notarization-error.log', error.message);
 
 		throw new Error('❌ Notarization Error,please check notarization-error.log');
 	}
