@@ -32,7 +32,7 @@
 	],
 	"dependencies": {
 		"dotenv": "^8.2.0",
-		"electron-notarize": "^1.1.1",
+		"@electron/notarize": "^2.1.0",
 		"js-yaml": "^3.14.0",
 		"read-pkg-up": "^7.0.0"
 	},

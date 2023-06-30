@@ -5,7 +5,7 @@ require('dotenv').config();
 const path = require('path');
 const fs = require('fs');
 const readPkgUp = require('read-pkg-up');
-const {notarize} = require('electron-notarize');
+const {notarize} = require('@electron/notarize');
 const yaml = require('js-yaml');
 // eslint-disable-next-line import/no-unresolved
 const util = require('builder-util');

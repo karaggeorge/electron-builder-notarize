@@ -1,8 +1,8 @@
-const {isNotaryToolAvailable} = require('electron-notarize/lib/notarytool');
+const {isNotaryToolAvailable} = require('@electron/notarize/lib/notarytool');
 const {
 	validateNotaryToolAuthorizationArgs,
 	validateLegacyAuthorizationArgs
-} = require('electron-notarize/lib/validate-args');
+} = require('@electron/notarize/lib/validate-args');
 
 function getAuthInfo() {
 	const {
