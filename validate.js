@@ -44,7 +44,9 @@ module.exports = async () => {
 				...creds,
 				tool: 'notarytool'
 			};
-		} catch {}
+		} catch (e) {
+			console.error(e);
+		}
 	} else {
 		console.log('notarytool not found, trying legacy.');
 	}
